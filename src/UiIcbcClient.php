@@ -2,6 +2,8 @@
 
 namespace CodeAnti\ICBC;
 
+use Exception;
+
 class UilIcbcClient extends DefaultIcbcClient
 {
     /**
@@ -27,6 +29,7 @@ class UilIcbcClient extends DefaultIcbcClient
      * @param $msgId
      * @param $appAuthToken
      * @return string
+     * @throws Exception
      */
     function buildPostForm($request, $msgId, $appAuthToken)
     {

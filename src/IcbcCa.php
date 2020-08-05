@@ -49,6 +49,7 @@ class IcbcCa
      * @param $content
      * @param $publicKey
      * @param $password
+     * @return int
      */
     public static function verify($content, $publicKey, $password)
     {

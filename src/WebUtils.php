@@ -72,11 +72,11 @@ class WebUtils
 
 
         $response = curl_exec($ch);
-        $resinfo = curl_getinfo($ch);
+        $resInfo = curl_getinfo($ch);
         curl_close($ch);
 
-        if ($resinfo["http_code"] != 200) {
-            throw new Exception("response status code is not valid. status code: " . $resinfo["http_code"]);
+        if ($resInfo["http_code"] != 200) {
+            throw new Exception("response status code is not valid. status code: " . $resInfo["http_code"]);
         }
         return $response;
     }
@@ -108,7 +108,7 @@ class WebUtils
      */
     public static function buildOrderedSignStr($path, $params)
     {
-        $isSorted = ksort($params);
+        ksort($params);
         $comSignStr = $path . '?';
 
         $hasParam = false;
@@ -135,8 +135,8 @@ class WebUtils
      */
     public static function buildForm($url, $params)
     {
-        $buildedFields = self::buildHiddenFields($params);
-        return '<form name="auto_submit_form" method="post" action="' . $url . '">' . "\n" . $buildedFields . '<input type="submit" value="立刻提交" style="display:none" >' . "\n" . '</form>' . "\n" . '<script>document.forms[0].submit();</script>';
+        $buildFields = self::buildHiddenFields($params);
+        return '<form name="auto_submit_form" method="post" action="' . $url . '">' . "\n" . $buildFields . '<input type="submit" value="立刻提交" style="display:none" >' . "\n" . '</form>' . "\n" . '<script>document.forms[0].submit();</script>';
     }
 
     /**
@@ -155,8 +155,8 @@ class WebUtils
             if ($key == null || $value == null) {
                 continue;
             }
-            $buildfield = self::buildHiddenField($key, $value);
-            $result = $result . $buildfield;
+            $buildField = self::buildHiddenField($key, $value);
+            $result = $result . $buildField;
         }
         return $result;
     }
