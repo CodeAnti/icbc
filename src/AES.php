@@ -17,23 +17,22 @@ class AES
         if ($plaintext == '') return '';
         $size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
 
-
-        //PKCS5Padding
+        // PKCS5Padding
         $padding = $size - strlen($plaintext) % $size;
-        // 添加Padding
+        // add Padding
         $plaintext .= str_repeat(chr($padding), $padding);
-
 
         $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
         $key=self::substr($key, 0, mcrypt_enc_get_key_size($module));
-        $iv = str_repeat("\0", $size);      //java里面的16个空数组对应的是\0.
-        /* Intialize encryption */
+
+        // java里面的16个空数组对应的是\0
+        $iv = str_repeat("\0", $size);
+
+        // Intialize encryption
         mcrypt_generic_init($module, $key, $iv);
 
-
-        /* Encrypt data */
+        // Encrypt data
         $encrypted = mcrypt_generic($module, $plaintext);
-
 
         /* Terminate encryption handler */
         mcrypt_generic_deinit($module);
@@ -65,11 +64,13 @@ class AES
     {
         return extension_loaded('mbstring') ? mb_substr($string,$start,$length,'8bit') : substr($string,$start,$length);
     }
+
     /**
      * This was AES-128 / CBC / PKCS5Padding
      * @author Terry
-     * @param string $encrypted     base64_encode encrypted string
+     * @param string $encrypted base64_encode encrypted string
      * @param string $key
+     * @throws CException
      * @return string
      */
     public static function AesDecrypt($encrypted, $key = null)
@@ -78,17 +79,17 @@ class AES
         $ciphertext_dec = base64_decode($encrypted);
         $module = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
         $key=self::substr($key, 0, mcrypt_enc_get_key_size($module));
-        
-        $iv = str_repeat("\0", 16);    //解密的初始化向量要和加密时一样。
-        /* Initialize encryption module for decryption */
+
+        // 解密的初始化向量要和加密时一样
+        $iv = str_repeat("\0", 16);
+
+        // Initialize encryption module for decryption
         mcrypt_generic_init($module, $key, $iv);
 
-
-        /* Decrypt encrypted string */
+        // Decrypt encrypted string
         $decrypted = mdecrypt_generic($module, $ciphertext_dec);
 
-
-        /* Terminate decryption handle and close module */
+        // Terminate decryption handle and close module
         mcrypt_generic_deinit($module);
         mcrypt_module_close($module);
 

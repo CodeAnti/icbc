@@ -1,10 +1,13 @@
 <?php
+
 namespace CodeAnti\ICBC;
 
 use Exception;
 
-class IcbcEncrypt{
+class IcbcEncrypt
+{
     /**
+     * encrypt content
      * @param $content
      * @param $encryptType
      * @param $encryptKey
@@ -14,14 +17,15 @@ class IcbcEncrypt{
      */
     public static function encryptContent($content, $encryptType, $encryptKey, $charset)
     {
-        if(IcbcConstants::$ENCRYPT_TYPE_AES == $encryptType){
-            return AES::AesEncrypt($content,base64_decode($encryptKey));
-        }else{
+        if (IcbcConstants::$ENCRYPT_TYPE_AES == $encryptType) {
+            return AES::AesEncrypt($content, base64_decode($encryptKey));
+        } else {
             throw new Exception("Only support AES encrypt!");
         }
     }
 
     /**
+     * decrypt content
      * @param $encryptedContent
      * @param $encryptType
      * @param $encryptKey
@@ -31,9 +35,9 @@ class IcbcEncrypt{
      */
     public static function decryptContent($encryptedContent, $encryptType, $encryptKey, $charset)
     {
-        if(IcbcConstants::$ENCRYPT_TYPE_AES == $encryptType){
-            return AES::AesDecrypt($encryptedContent,base64_decode($encryptKey));
-        }else{
+        if (IcbcConstants::$ENCRYPT_TYPE_AES == $encryptType) {
+            return AES::AesDecrypt($encryptedContent, base64_decode($encryptKey));
+        } else {
             throw new Exception("Only support AES decrypt!");
         }
     }

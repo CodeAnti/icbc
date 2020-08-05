@@ -1,72 +1,73 @@
 <?php
+
 namespace CodeAnti\ICBC;
 
 class IcbcConstants
 {
-	public static $SIGN_TYPE = "sign_type";
+    public static $SIGN_TYPE = "sign_type";
 
-	public static $SIGN_TYPE_RSA = "RSA";
-	
-	public static $SIGN_TYPE_RSA2 = "RSA2";
+    public static $SIGN_TYPE_RSA = "RSA";
 
-	public static $SIGN_TYPE_SM2 = "SM2";
-	
-	public static $SIGN_TYPE_CA = "CA";
+    public static $SIGN_TYPE_RSA2 = "RSA2";
 
-	public static $SIGN_SHA1RSA_ALGORITHMS = "SHA1WithRSA";
+    public static $SIGN_TYPE_SM2 = "SM2";
 
-	public static $SIGN_SHA256RSA_ALGORITHMS = "SHA256WithRSA";
+    public static $SIGN_TYPE_CA = "CA";
 
-	public static $ENCRYPT_TYPE_AES = "AES";
+    public static $SIGN_SHA1RSA_ALGORITHMS = "SHA1WithRSA";
 
-	public static $APP_ID = "app_id";
+    public static $SIGN_SHA256RSA_ALGORITHMS = "SHA256WithRSA";
 
-	public static $FORMAT = "format";
+    public static $ENCRYPT_TYPE_AES = "AES";
 
-	public static $TIMESTAMP = "timestamp";
+    public static $APP_ID = "app_id";
 
-	public static $SIGN = "sign";
+    public static $FORMAT = "format";
 
-	public static $APP_AUTH_TOKEN = "app_auth_token";
+    public static $TIMESTAMP = "timestamp";
 
-	public static $CHARSET = "charset";
+    public static $SIGN = "sign";
 
-	public static $NOTIFY_URL = "notify_url";
+    public static $APP_AUTH_TOKEN = "app_auth_token";
 
-	public static $RETURN_URL = "return_url";
+    public static $CHARSET = "charset";
 
-	public static $ENCRYPT_TYPE = "encrypt_type";
+    public static $NOTIFY_URL = "notify_url";
 
-	public static $BIZ_CONTENT_KEY = "biz_content";
+    public static $RETURN_URL = "return_url";
 
-	/** 默认时间格式 **/
-	public static $DATE_TIME_FORMAT = "Y-m-d H:i:s";//java版"yyyy-MM-dd HH:mm:ss"
+    public static $ENCRYPT_TYPE = "encrypt_type";
 
-	/** Date默认时区 **/
-    public static $DATE_TIMEZONE = "Asia/Shanghai";//东八区
+    public static $BIZ_CONTENT_KEY = "biz_content";
 
-	/** UTF-8字符集 **/
-	public static $CHARSET_UTF8 = "UTF-8";
+    /** 默认时间格式 **/
+    public static $DATE_TIME_FORMAT = "Y-m-d H:i:s";
 
-	/** GBK字符集 **/
-	public static $CHARSET_GBK = "GBK";
+    /** Date默认时区 **/
+    public static $DATE_TIMEZONE = "Etc/GMT+8";
 
-	/** JSON 应格式 */
-	public static $FORMAT_JSON = "json";
+    /** UTF-8字符集 **/
+    public static $CHARSET_UTF8 = "UTF-8";
 
-	/** XML 应格式 */
-	public static $FORMAT_XML = "xml";
+    /** GBK字符集 **/
+    public static $CHARSET_GBK = "GBK";
 
-	public static $CA = "ca";
-	
-	public static $PASSWORD = "password";
-	
-	public static $RESPONSE_BIZ_CONTENT = "response_biz_content";
+    /** JSON 应格式 */
+    public static $FORMAT_JSON = "json";
 
-	/** 消息唯一编号 **/
-	public static $MSG_ID = "msg_id";
-	
-	/** sdk版本号在header中的key */
-	public static $VERSION_HEADER_NAME = "APIGW-VERSION";
+    /** XML 应格式 */
+    public static $FORMAT_XML = "xml";
+
+    public static $CA = "ca";
+
+    public static $PASSWORD = "password";
+
+    public static $RESPONSE_BIZ_CONTENT = "response_biz_content";
+
+    /** 消息唯一编号 **/
+    public static $MSG_ID = "msg_id";
+
+    /** sdk版本号在header中的key */
+    public static $VERSION_HEADER_NAME = "APIGW-VERSION";
 
 }
