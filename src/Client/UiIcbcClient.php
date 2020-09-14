@@ -1,7 +1,9 @@
 <?php
 
-namespace CodeAnti\ICBC;
+namespace CodeAnti\ICBC\Client;
 
+use CodeAnti\ICBC\Constant\IcbcConstant;
+use CodeAnti\ICBC\Util\WebUtils;
 use Exception;
 
 class UilIcbcClient extends DefaultIcbcClient
@@ -45,14 +47,14 @@ class UilIcbcClient extends DefaultIcbcClient
      */
     function buildUrlQueryParams($params)
     {
-        $apiParamNames[] = IcbcConstants::$SIGN;
-        $apiParamNames[] = IcbcConstants::$APP_ID;
-        $apiParamNames[] = IcbcConstants::$SIGN_TYPE;
-        $apiParamNames[] = IcbcConstants::$CHARSET;
-        $apiParamNames[] = IcbcConstants::$FORMAT;
-        $apiParamNames[] = IcbcConstants::$ENCRYPT_TYPE;
-        $apiParamNames[] = IcbcConstants::$TIMESTAMP;
-        $apiParamNames[] = IcbcConstants::$MSG_ID;
+        $apiParamNames[] = IcbcConstant::$SIGN;
+        $apiParamNames[] = IcbcConstant::$APP_ID;
+        $apiParamNames[] = IcbcConstant::$SIGN_TYPE;
+        $apiParamNames[] = IcbcConstant::$CHARSET;
+        $apiParamNames[] = IcbcConstant::$FORMAT;
+        $apiParamNames[] = IcbcConstant::$ENCRYPT_TYPE;
+        $apiParamNames[] = IcbcConstant::$TIMESTAMP;
+        $apiParamNames[] = IcbcConstant::$MSG_ID;
 
         $urlQueryParams = [];
         foreach ($params as $key => $value) {
@@ -69,14 +71,14 @@ class UilIcbcClient extends DefaultIcbcClient
      */
     function buildBodyParams($params)
     {
-        $apiParamNames[] = IcbcConstants::$SIGN;
-        $apiParamNames[] = IcbcConstants::$APP_ID;
-        $apiParamNames[] = IcbcConstants::$SIGN_TYPE;
-        $apiParamNames[] = IcbcConstants::$CHARSET;
-        $apiParamNames[] = IcbcConstants::$FORMAT;
-        $apiParamNames[] = IcbcConstants::$ENCRYPT_TYPE;
-        $apiParamNames[] = IcbcConstants::$TIMESTAMP;
-        $apiParamNames[] = IcbcConstants::$MSG_ID;
+        $apiParamNames[] = IcbcConstant::$SIGN;
+        $apiParamNames[] = IcbcConstant::$APP_ID;
+        $apiParamNames[] = IcbcConstant::$SIGN_TYPE;
+        $apiParamNames[] = IcbcConstant::$CHARSET;
+        $apiParamNames[] = IcbcConstant::$FORMAT;
+        $apiParamNames[] = IcbcConstant::$ENCRYPT_TYPE;
+        $apiParamNames[] = IcbcConstant::$TIMESTAMP;
+        $apiParamNames[] = IcbcConstant::$MSG_ID;
 
         $urlQueryParams = [];
         foreach ($params as $key => $value) {

@@ -1,7 +1,8 @@
 <?php
 
-namespace CodeAnti\ICBC;
+namespace CodeAnti\ICBC\Util;
 
+use CodeAnti\ICBC\Constant\IcbcConstant;
 use Exception;
 
 class WebUtils
@@ -19,7 +20,7 @@ class WebUtils
     public static function doGet($url, $params, $charset)
     {
         $headers = array();
-        $headers[IcbcConstants::$VERSION_HEADER_NAME] = self::$version;
+        $headers[IcbcConstant::$VERSION_HEADER_NAME] = self::$version;
         $getUrl = self::buildGetUrl($url, $params, $charset);
 
         $ch = curl_init();
@@ -33,11 +34,11 @@ class WebUtils
 
 
         $response = curl_exec($ch);
-        $resinfo = curl_getinfo($ch);
+        $resInfo = curl_getinfo($ch);
         curl_close($ch);
 
-        if ($resinfo["http_code"] != 200) {
-            throw new Exception("response status code is not valid. status code: " . $resinfo["http_code"]);
+        if ($resInfo["http_code"] != 200) {
+            throw new Exception("response status code is not valid. status code: " . $resInfo["http_code"]);
         }
 
         return $response;
@@ -55,7 +56,7 @@ class WebUtils
     {
         $headers = array();
         $headers[] = 'Expect:';
-        $headers[IcbcConstants::$VERSION_HEADER_NAME] = self::$version;
+        $headers[IcbcConstant::$VERSION_HEADER_NAME] = self::$version;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

@@ -1,7 +1,12 @@
 <?php
 
-namespace CodeAnti\ICBC;
+namespace CodeAnti\ICBC\Client;
 
+use Carbon\Carbon;
+use CodeAnti\ICBC\Constant\IcbcConstant;
+use CodeAnti\ICBC\Sign\IcbcEncrypt;
+use CodeAnti\ICBC\Sign\IcbcSignature;
+use CodeAnti\ICBC\Util\WebUtils;
 use Exception;
 
 class DefaultIcbcClient
@@ -74,19 +79,19 @@ class DefaultIcbcClient
         $this->appId = $appId;
         $this->privateKey = $privateKey;
         if ($signType == null || $signType == "") {
-            $this->signType = IcbcConstants::$SIGN_TYPE_RSA;
+            $this->signType = IcbcConstant::$SIGN_TYPE_RSA;
         } else {
             $this->signType = $signType;
         }
 
         if ($charset == null || $charset == "") {
-            $this->charset = IcbcConstants::$CHARSET_UTF8;
+            $this->charset = IcbcConstant::$CHARSET_UTF8;
         } else {
             $this->charset = $charset;
         }
 
         if ($format == null || $format == "") {
-            $this->format = IcbcConstants::$FORMAT_JSON;
+            $this->format = IcbcConstant::$FORMAT_JSON;
         } else {
             $this->format = $format;
         }
@@ -125,11 +130,11 @@ class DefaultIcbcClient
         }
 
         // 增加了对传回报文中含有中文字符以及反斜杠的转换(json_encode(str,JSON_UNESCAPED_UNICODE(240)+JSON_UNESCAPED_SLASHES(80)=320))
-        $respBizContentStr = json_encode(json_decode($respStr, true)[IcbcConstants::$RESPONSE_BIZ_CONTENT], 320);
-        $sign = json_decode($respStr, true)[IcbcConstants::$SIGN];
+        $respBizContentStr = json_encode(json_decode($respStr, true)[IcbcConstant::$RESPONSE_BIZ_CONTENT], 320);
+        $sign = json_decode($respStr, true)[IcbcConstant::$SIGN];
 
         // 解析响应
-        $passed = IcbcSignature::verify($respBizContentStr, IcbcConstants::$SIGN_TYPE_RSA, $this->icbcPublicKey, $this->charset, $sign, $this->password);
+        $passed = IcbcSignature::verify($respBizContentStr, IcbcConstant::$SIGN_TYPE_RSA2, $this->icbcPublicKey, $this->charset, $sign, $this->password);
 
         if (!$passed) {
             throw new Exception("icbc sign verify not passed!");
@@ -160,29 +165,27 @@ class DefaultIcbcClient
             $params = array_merge($params, $request["extraParams"]);
         }
 
-        $params[IcbcConstants::$APP_ID] = $this->appId;
-        $params[IcbcConstants::$SIGN_TYPE] = $this->signType;
-        $params[IcbcConstants::$CHARSET] = $this->charset;
-        $params[IcbcConstants::$FORMAT] = $this->format;
-        $params[IcbcConstants::$CA] = $this->ca;
-        $params[IcbcConstants::$APP_AUTH_TOKEN] = $appAuthToken;
-        $params[IcbcConstants::$MSG_ID] = $msgId;
-
-        date_default_timezone_set(IcbcConstants::$DATE_TIMEZONE);
-        $params[IcbcConstants::$TIMESTAMP] = date(IcbcConstants::$DATE_TIME_FORMAT);
+        $params[IcbcConstant::$APP_ID] = $this->appId;
+        $params[IcbcConstant::$SIGN_TYPE] = $this->signType;
+        $params[IcbcConstant::$CHARSET] = $this->charset;
+        $params[IcbcConstant::$FORMAT] = $this->format;
+        $params[IcbcConstant::$CA] = $this->ca;
+        $params[IcbcConstant::$APP_AUTH_TOKEN] = $appAuthToken;
+        $params[IcbcConstant::$MSG_ID] = $msgId;
+        $params[IcbcConstant::$TIMESTAMP] = Carbon::now()->format("Y-m-d H:i:s");
 
         if ($request["isNeedEncrypt"]) {
             if ($bizContentStr != null) {
-                $params[IcbcConstants::$ENCRYPT_TYPE] = $this->encryptType;
-                $params[IcbcConstants::$BIZ_CONTENT_KEY] = IcbcEncrypt::encryptContent($bizContentStr, $this->encryptType, $this->encryptKey, $this->charset);
+                $params[IcbcConstant::$ENCRYPT_TYPE] = $this->encryptType;
+                $params[IcbcConstant::$BIZ_CONTENT_KEY] = IcbcEncrypt::encryptContent($bizContentStr, $this->encryptType, $this->encryptKey, $this->charset);
             }
         } else {
-            $params[IcbcConstants::$BIZ_CONTENT_KEY] = $bizContentStr;
+            $params[IcbcConstant::$BIZ_CONTENT_KEY] = $bizContentStr;
         }
 
         $strToSign = WebUtils::buildOrderedSignStr($path, $params);
         $signedStr = IcbcSignature::sign($strToSign, $this->signType, $this->privateKey, $this->charset, $this->password);
-        $params[IcbcConstants::$SIGN] = $signedStr;
+        $params[IcbcConstant::$SIGN] = $signedStr;
         return $params;
 
     }

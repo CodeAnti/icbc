@@ -1,8 +1,8 @@
 <?php
 
-namespace CodeAnti\ICBC;
+namespace CodeAnti\ICBC\Constant;
 
-class IcbcConstants
+class IcbcConstant
 {
     public static $SIGN_TYPE = "sign_type";
 
@@ -45,6 +45,9 @@ class IcbcConstants
 
     /** Date默认时区 **/
     public static $DATE_TIMEZONE = "Etc/GMT+8";
+
+    /** Date上海时区 **/
+    public static $DATA_TIMEZONE_SHANGHAI = "";
 
     /** UTF-8字符集 **/
     public static $CHARSET_UTF8 = "UTF-8";

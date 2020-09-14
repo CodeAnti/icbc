@@ -1,5 +1,5 @@
 <?php
-namespace CodeAnti\ICBC;
+namespace CodeAnti\ICBC\Sign;
 
 class AES
 {
@@ -70,7 +70,6 @@ class AES
      * @author Terry
      * @param string $encrypted base64_encode encrypted string
      * @param string $key
-     * @throws CException
      * @return string
      */
     public static function AesDecrypt($encrypted, $key = null)

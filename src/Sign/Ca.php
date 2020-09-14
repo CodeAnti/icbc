@@ -1,20 +1,20 @@
 <?php
 
-namespace CodeAnti\ICBC;
+namespace CodeAnti\ICBC\Sign;
 
 use Exception;
 
-class IcbcCa
+class Ca
 {
     /**
      * sign
      * @param $content
-     * @param $privatekey
+     * @param $privateKey
      * @param $password
      * @return mixed
      * @throws Exception
      */
-    public static function sign($content, $privatekey, $password)
+    public static function sign($content, $privateKey, $password)
     {
         if (!extension_loaded('infosec')) {
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -29,7 +29,7 @@ class IcbcCa
             throw new Exception("no source data input");
         }
 
-        $contents = base64_decode($privatekey);
+        $contents = base64_decode($privateKey);
         $key = substr($contents, 2);
 
         $pass = $password;
@@ -38,9 +38,9 @@ class IcbcCa
         } else {
             $signature = sign($plaint, $key, $pass);
             $code = current($signature);
-            $len = next($signature);
-            $signcode = base64enc($code);
-            return current($signcode);
+            next($signature);
+            $signCode = base64enc($code);
+            return current($signCode);
         }
     }
 
