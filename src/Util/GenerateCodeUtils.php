@@ -22,4 +22,14 @@ class GenerateCodeUtils
     {
         return $prefix . 'ODC' . rand(10000, 99999) . time();
     }
+
+    /**
+     * 生成msgId
+     * @param String $prefix
+     * @return string
+     */
+    public static function generateMsgId(String $prefix = '')
+    {
+        return $prefix . 'MSG' . rand(10000, 999999) . time();
+    }
 }
