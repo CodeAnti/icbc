@@ -90,4 +90,109 @@ class IcbcPay
 
         return json_decode($response, true);
     }
+
+    /**
+     * 工银e企付确认支付服务
+     * @param string $msgId
+     * @param array $bizContent
+     * @param array|null $extraParams
+     * @return mixed
+     * @throws Exception
+     */
+    public function preservationPay(string $msgId, array $bizContent, array $extraParams = null)
+    {
+        $response = $this->defaultIcbcClient->execute([
+            "serviceUrl" => $this->serviceUrl . self::ICBC_PRESERVATION_PAY_API,
+            "method" => 'POST',
+            "isNeedEncrypt" => false,
+            "extraParams" => $extraParams,
+            "biz_content" => $bizContent
+        ], $msgId, '');
+
+        return json_decode($response, true);
+    }
+
+    /**
+     * 工银e企付取消支付服务
+     * @param string $msgId
+     * @param array $bizContent
+     * @param array|null $extraParams
+     * @return mixed
+     * @throws Exception
+     */
+    public function preservationCancel(string $msgId, array $bizContent, array $extraParams = null)
+    {
+        $response = $this->defaultIcbcClient->execute([
+            "serviceUrl" => $this->serviceUrl . self::ICBC_CANCEL_PRESERVATION_PAY_API,
+            "method" => 'POST',
+            "isNeedEncrypt" => false,
+            "extraParams" => $extraParams,
+            "biz_content" => $bizContent
+        ], $msgId, '');
+
+        return json_decode($response, true);
+    }
+
+    /**
+     * 工银e企付支付申请查询服务
+     * @param string $msgId
+     * @param array $bizContent
+     * @param array|null $extraParams
+     * @return mixed
+     * @throws Exception
+     */
+    public function orderQuery(string $msgId, array $bizContent, array $extraParams = null)
+    {
+        $response = $this->defaultIcbcClient->execute([
+            "serviceUrl" => $this->serviceUrl . self::ICBC_ORDER_QUERY_API,
+            "method" => 'POST',
+            "isNeedEncrypt" => false,
+            "extraParams" => $extraParams,
+            "biz_content" => $bizContent
+        ], $msgId, '');
+
+        return json_decode($response, true);
+    }
+
+    /**
+     * 工银e企付支付申请关闭服务
+     * @param string $msgId
+     * @param array $bizContent
+     * @param array|null $extraParams
+     * @return mixed
+     * @throws Exception
+     */
+    public function orderClose(string $msgId, array $bizContent, array $extraParams = null)
+    {
+        $response = $this->defaultIcbcClient->execute([
+            "serviceUrl" => $this->serviceUrl . self::ICBC_ORDER_CLOSE_API,
+            "method" => 'POST',
+            "isNeedEncrypt" => false,
+            "extraParams" => $extraParams,
+            "biz_content" => $bizContent
+        ], $msgId, '');
+
+        return json_decode($response, true);
+    }
+
+    /**
+     * 工银e企付追缴保留金额服务
+     * @param string $msgId
+     * @param array $bizContent
+     * @param array|null $extraParams
+     * @return mixed
+     * @throws Exception
+     */
+    public function amountDeposit(string $msgId, array $bizContent, array $extraParams = null)
+    {
+        $response = $this->defaultIcbcClient->execute([
+            "serviceUrl" => $this->serviceUrl . self::ICBC_AMOUNT_DEPOSIT_API,
+            "method" => 'POST',
+            "isNeedEncrypt" => false,
+            "extraParams" => $extraParams,
+            "biz_content" => $bizContent
+        ], $msgId, '');
+
+        return json_decode($response, true);
+    }
 }
