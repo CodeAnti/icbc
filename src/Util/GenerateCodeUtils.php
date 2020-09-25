@@ -32,4 +32,14 @@ class GenerateCodeUtils
     {
         return $prefix . 'MSG' . rand(10000, 999999) . time();
     }
+
+    /**
+     * 生成msgId
+     * @param String $prefix
+     * @return string
+     */
+    public static function generateUniqueSeq(String $prefix = '')
+    {
+        return $prefix . rand(10000, 999999) . time();
+    }
 }

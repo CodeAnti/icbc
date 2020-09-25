@@ -153,4 +153,14 @@ class IcbcConstant
      */
     public static $IDENTITY_MODE_EXTRA = "0";
     public static $IDENTITY_MODE_CERTIFICATION_FREE = "1";
+
+    /**
+     * 收款方系统内外标志,收方保留场景，收款方只支持境内工行
+     * 1-境内工行
+     * 2-境内他行
+     * 3-境外
+     */
+    public static $PAYEE_SYSTEM_FLAG_INSIDE_ICBC = "1";
+    public static $PAYEE_SYSTEM_FLAG_INSIDE_NOT_ICBC = "2";
+    public static $PAYEE_SYSTEM_FLAG_OUTSIDE = "3";
 }
