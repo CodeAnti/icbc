@@ -163,4 +163,10 @@ class IcbcConstant
     public static $PAYEE_SYSTEM_FLAG_INSIDE_ICBC = "1";
     public static $PAYEE_SYSTEM_FLAG_INSIDE_NOT_ICBC = "2";
     public static $PAYEE_SYSTEM_FLAG_OUTSIDE = "3";
+
+    /**
+     * 担保业务种类
+     * 303-取消支付
+     */
+    public static $GUARANTEE_OPERATOR_TYPE_CANCEL = '303';
 }
